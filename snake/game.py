@@ -45,7 +45,7 @@ def manipulateSpeed():
     increment = 2 
     if (score > lowerLimit):
         if (deltaScore > increment):
-            gameloop.speed += .01 
+            gameloop.speed = .5 
             deltaScore = 0
         else:
             deltaScore +=1
@@ -62,7 +62,7 @@ def eatApple(i):
     score += score_value
     # update the speed based on score, 
     # as well as challenge mode
-    if (parser.option.challenge):
+    if (gameloop.challengeMode):
         manipulateSpeed()
     # adjust total score
     try:

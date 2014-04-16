@@ -18,7 +18,7 @@ last_update = None
 playing = False
 state = 0
 speed = 0
-
+challengeMode = False
 
 def update():
     game.update()
@@ -51,7 +51,8 @@ def start():
     global playing, state
 
     playing = True
-
+    if(parser.options.challenge):
+        challengeMode = True
     # Launch editor mode
     if (parser.options.editor):
         os.system("/usr/share/make-snake/snake-editor/__main__.py")

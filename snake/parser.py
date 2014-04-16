@@ -34,5 +34,7 @@ def init():
     parser.add_option("-e", "--editor",
                       action="store_true", dest="editor", default=False,
                       help="Enter editor mode")
-
+    parser.add_option("-c","--challenge",
+                     action="store_true", dest="challenge",default=False,
+                     help="Enter Challenge mode")
     (options, args) = parser.parse_args()

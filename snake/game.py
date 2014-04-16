@@ -36,6 +36,20 @@ def checkCatch():
         if (snake[0][0]) == apple[0] and (snake[0][1]) == apple[1]:
             eatApple(i)
 
+def manipulateSpeed():
+    global score
+    deltaScore = 0
+    #Lower limit to determine when speed will increase
+    lowerLimit = 5
+    #spacing between speed increases
+    increment = 2 
+    if (score > lowerLimit):
+        if (deltaScore > increment):
+            gameloop.speed += .01 
+            deltaScore = 0
+        else:
+            deltaScore +=1
+
 
 def eatApple(i):
     global grow, score
@@ -46,7 +60,10 @@ def eatApple(i):
 
     score_value = 1
     score += score_value
-
+    # update the speed based on score, 
+    # as well as challenge mode
+    if (parser.option.challenge):
+        manipulateSpeed()
     # adjust total score
     try:
         gs.state['total_score'] += score_value

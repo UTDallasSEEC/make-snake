@@ -1,6 +1,8 @@
 
 # controls.py
 #
+# Controls menu navigation via keys
+#
 # Copyright (C) 2013 Kano Computing Ltd.
 # License:   http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
@@ -26,11 +28,12 @@ currentMenu = menus.main
 currentCategory = None
 prevIndex = 0
 symbolMode = False
+nameMode = False
 tile = ''
 
 
 def update():
-    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode
+    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode
 
     key = graphics.screen.getch()
 
@@ -54,6 +57,26 @@ def update():
             theme.init()
             gameloop.init()
             symbolMode = False
+            return
+        if nameMode:
+            tile = ''
+            while key != keys['ENTER']:
+                if key > 0 and key != keys['ENTER']:
+                    tile += curses.keyname(key)
+                    #Redraw theme and menus
+                    theme.init()
+                    gameloop.init()
+                    graphics.drawCurrentMenu()
+                key = graphics.screen.getch()
+            if tile == '':
+                tile = ' '
+            category = currentMenu[currentIdx][0]
+            theme.set_tiles_theme(category, tile[:2])
+            tile = ''
+            #REdraw board
+            theme.init()
+            gameloop.init()
+            nameMode = False
             return
         if key == keys['DOWN']:
             currentIdx = (currentIdx + 1) % len(currentMenu)
@@ -102,6 +125,9 @@ def update():
                 gameloop.init()
                 '''
                 symbolMode = True
+                return
+            elif currentMenu[currentIdx][1] == "name":
+                nameMode = True
                 return
             # Submenu
             else:

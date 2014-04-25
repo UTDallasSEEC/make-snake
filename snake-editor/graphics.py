@@ -80,6 +80,21 @@ def drawCurrentMenu():
             else:
                 text = '  ' + string[0]
             drawTile(x, y, text, theme.get_color('menu'))
+        elif controls.nameMode:
+            if controls.currentIdx == idx:
+                text = '> ' + string[0]
+                if len(controls.tile) > 0:
+                    text += ' : ' + controls.tile[0]
+                    if len(controls.tile) > 1:
+                        text += ' ' + controls.tile[1]
+                        text += '   >> Press [ENTER]'
+                    else:
+                        text += ' _'
+                else:
+                    text += ' : _ _'
+            else:
+                text = '  ' + string[0]
+            drawTile(x, y, text, theme.get_color('menu'))        
         # Rest
         else:
             if controls.currentIdx == idx:

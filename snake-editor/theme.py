@@ -11,11 +11,13 @@ import xml.etree.ElementTree as ET
 import os
 import shutil
 import sys
+import controls
 
 from kano.utils import ensure_dir
 
+themeName = controls.themeName
 app_dir = os.path.expanduser('~/Snake-content')
-custom_file = app_dir + '/custom_theme'
+custom_file = app_dir + '/' + themeName
 colors_map = {}
 theme = {
     "colors": {
@@ -42,8 +44,8 @@ theme = {
 
 
 def init():
-    global theme, colors_map
-
+    global theme, colors_map, themeName
+    updateName()
     # copy custom_theme if it doesn't exist
     if not os.path.exists(custom_file):
         src_file = '/usr/share/make-snake/custom_theme'
@@ -55,7 +57,10 @@ def init():
     load_custom_theme()
     colors_map = get_colors_map()
 
-
+def updateName():
+    global themeName, custom_file, app_dir
+    custom_file = app_dir + '/' + controls.themeName
+    
 def get_color(key):
     return curses.color_pair(colors_map.get(key, 0))
 

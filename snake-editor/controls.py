@@ -22,18 +22,19 @@ keys = {
     'Q': 0x71,
     'ENTER': 0x0a,
 }
-menu_stack = [[menus.main, '']]
+menu_stack = [[menus.naming, '']]
 currentIdx = 0
-currentMenu = menus.main
+currentMenu = menus.naming
 currentCategory = None
 prevIndex = 0
 symbolMode = False
 nameMode = False
+themeName = 'custom_theme'
 tile = ''
 
 
 def update():
-    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode
+    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode, themeName
 
     key = graphics.screen.getch()
 
@@ -68,15 +69,17 @@ def update():
                     gameloop.init()
                     graphics.drawCurrentMenu()
                 key = graphics.screen.getch()
-            if tile == '':
-                tile = ' '
+            #if tile == '':
+             #   tile = ' '
             category = currentMenu[currentIdx][0]
-            theme.set_tiles_theme(category, tile[:2])
+            #theme.set_tiles_theme(category, tile[:2])
+            themeName = tile[:2]
             tile = ''
             #REdraw board
             theme.init()
             gameloop.init()
             nameMode = False
+            currentMenu = menus.main
             return
         if key == keys['DOWN']:
             currentIdx = (currentIdx + 1) % len(currentMenu)

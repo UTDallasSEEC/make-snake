@@ -28,3 +28,5 @@ elements = [["Snake", snake], ["Lives", lives], ["Apples", apple],
 board = [["Background", background], ["Border", border], ["Back", 0]]
 
 main = [["Board", board], ["Elements", elements], ["Name","name"], ["Exit", None]]
+
+naming = [["Name","name"], ["Exit", None]]

@@ -83,15 +83,11 @@ def drawCurrentMenu():
         elif controls.nameMode:
             if controls.currentIdx == idx:
                 text = '> ' + string[0]
+                
                 if len(controls.tile) > 0:
-                    text += ' : ' + controls.tile[0]
-                    if len(controls.tile) > 1:
-                        text += ' ' + controls.tile[1]
-                        text += '   >> Press [ENTER]'
-                    else:
-                        text += ' _'
+                    text += ' : ' + controls.tile 
                 else:
-                    text += ' : _ _'
+                    text += ' :'
             else:
                 text = '  ' + string[0]
             drawTile(x, y, text, theme.get_color('menu'))        

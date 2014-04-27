@@ -65,7 +65,7 @@ def update():
                 if key > 0 and key != keys['ENTER']:
                     tile += curses.keyname(key)
                     #Redraw theme and menus
-                    theme.init()
+                    #theme.init()
                     gameloop.init()
                     graphics.drawCurrentMenu()
                 key = graphics.screen.getch()
@@ -73,7 +73,7 @@ def update():
              #   tile = ' '
             category = currentMenu[currentIdx][0]
             #theme.set_tiles_theme(category, tile[:2])
-            themeName = tile[:2]
+            themeName = tile
             tile = ''
             #REdraw board
             theme.init()

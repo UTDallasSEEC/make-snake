@@ -132,6 +132,10 @@ def update():
             elif currentMenu[currentIdx][1] == "name":
                 nameMode = True
                 return
+            elif currentMenu[currentIdx][1] == "existing":
+                themeName = currentMenu[currentIdx][0]
+                currentMenu = menus.main
+                return
             # Submenu
             else:
                 prevIndex = currentIdx

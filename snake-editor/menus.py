@@ -4,7 +4,7 @@
 # Copyright (C) 2013 Kano Computing Ltd.
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
-
+import os
 
 colors = [["Black", None], ["Red", None], ["Green", None], ["Yellow", None],
           ["Blue", None], ["Magenta", None], ["Cyan", None], ["White", None]]
@@ -29,5 +29,11 @@ board = [["Background", background], ["Border", border], ["Back", 0]]
 
 main = [["Board", board], ["Elements", elements], ["Name","name"], ["Exit", None]]
 
-naming = [["Name","name"], ["Exit", None]]
-
+#naming = [["Name","name"], ["Exit", None]]
+fileLocal = os.path.expanduser('~/Snake-content')
+themes = os.listdir(fileLocal)
+naming = []
+naming.append(["Name","name"])
+for theme in themes:
+    naming.append([theme,"existing"])
+naming.append(["Exit", None])

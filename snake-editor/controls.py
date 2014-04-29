@@ -129,9 +129,11 @@ def update():
                 '''
                 symbolMode = True
                 return
+            #Custom Name Mode
             elif currentMenu[currentIdx][1] == "name":
                 nameMode = True
                 return
+            #Modify existing theme
             elif currentMenu[currentIdx][1] == "existing":
                 themeName = currentMenu[currentIdx][0]
                 currentMenu = menus.main

@@ -136,6 +136,8 @@ def update():
             #Modify existing theme
             elif currentMenu[currentIdx][1] == "existing":
                 themeName = currentMenu[currentIdx][0]
+                theme.updateName()
+                theme.init()
                 currentMenu = menus.main
                 return
             # Submenu

@@ -61,6 +61,7 @@ def updateName():
     global themeName, custom_file, app_dir
     custom_file = app_dir + '/' + controls.themeName
     
+
 def get_color(key):
     return curses.color_pair(colors_map.get(key, 0))
 

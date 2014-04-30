@@ -63,7 +63,10 @@ def update():
             tile = ''
             while key != keys['ENTER']:
                 if key > 0 and key != keys['ENTER']:
-                    tile += curses.keyname(key)
+                    if key == 127:
+                        tile = tile[:-1]
+                    else:
+                        tile += curses.keyname(key)
                     #Redraw theme and menus
                     #theme.init()
                     gameloop.init()

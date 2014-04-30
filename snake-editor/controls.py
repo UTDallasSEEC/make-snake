@@ -21,6 +21,7 @@ keys = {
     'UP': 0x41,
     'Q': 0x71,
     'ENTER': 0x0a,
+    'BACKSPACE': 0x7F,
 }
 menu_stack = [[menus.naming, '']]
 currentIdx = 0
@@ -63,22 +64,17 @@ def update():
             tile = ''
             while key != keys['ENTER']:
                 if key > 0 and key != keys['ENTER']:
-                    if key == 127:
+                    if key == keys['BACKSPACE']:
                         tile = tile[:-1]
                     else:
                         tile += curses.keyname(key)
                     #Redraw theme and menus
-                    #theme.init()
                     gameloop.init()
                     graphics.drawCurrentMenu()
                 key = graphics.screen.getch()
-            #if tile == '':
-             #   tile = ' '
-            category = currentMenu[currentIdx][0]
-            #theme.set_tiles_theme(category, tile[:2])
             themeName = tile
             tile = ''
-            #REdraw board
+            #REdraw board, will also change to new name.
             theme.init()
             gameloop.init()
             nameMode = False
@@ -114,22 +110,6 @@ def update():
                 return
             # Tile option
             elif currentMenu[currentIdx][1] == "symbols":
-                '''
-                tile = ''
-                key = ''
-                while key != keys['ENTER']:
-                    key = graphics.screen.getch()
-                    if key > 0 and key != keys['ENTER']:
-                        tile += curses.keyname(key)
-                if tile == '':
-                    tile = '  '
-                category = currentMenu[currentIdx][0]
-                theme.set_tiles_theme(category, tile[:2])
-                navigate_back()
-                # Redraw the board
-                theme.init()
-                gameloop.init()
-                '''
                 symbolMode = True
                 return
             #Custom Name Mode
@@ -138,8 +118,8 @@ def update():
                 return
             #Modify existing theme
             elif currentMenu[currentIdx][1] == "existing":
+                #pass the saved name from the theme
                 themeName = currentMenu[currentIdx][0]
-                theme.updateName()
                 theme.init()
                 currentMenu = menus.main
                 return

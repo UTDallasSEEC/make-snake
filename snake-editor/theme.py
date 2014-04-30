@@ -45,7 +45,8 @@ theme = {
 
 def init():
     global theme, colors_map, themeName
-    updateName()
+    #refreshes the name before writing to the file
+    update_name()
     # copy custom_theme if it doesn't exist
     if not os.path.exists(custom_file):
         src_file = '/usr/share/make-snake/custom_theme'
@@ -57,7 +58,7 @@ def init():
     load_custom_theme()
     colors_map = get_colors_map()
 
-def updateName():
+def update_name():
     global themeName, custom_file, app_dir
     custom_file = app_dir + '/' + controls.themeName
     

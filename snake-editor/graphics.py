@@ -80,14 +80,14 @@ def drawCurrentMenu():
             else:
                 text = '  ' + string[0]
             drawTile(x, y, text, theme.get_color('menu'))
+        #Naming mode
         elif controls.nameMode:
             if controls.currentIdx == idx:
-                text = '> ' + string[0]
-                
+                text = '> ' + string[0]                
                 if len(controls.tile) > 0:
                     text += ' : ' + controls.tile 
                 else:
-                    text += ' :'
+                    text += ' : '
             else:
                 text = '  ' + string[0]
             drawTile(x, y, text, theme.get_color('menu'))        

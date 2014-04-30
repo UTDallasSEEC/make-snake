@@ -42,7 +42,6 @@ def init():
 
     colors_map = get_colors_map()
 
-
 def get_color(key):
     return curses.color_pair(colors_map.get(key, 0))
 

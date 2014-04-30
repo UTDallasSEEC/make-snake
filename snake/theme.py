@@ -15,15 +15,42 @@ import themes
 import xml.etree.ElementTree as ET
 
 from kano.utils import ensure_dir
+themeName = 'custom_theme'
 app_dir = os.path.expanduser('~/Snake-content')
-custom_file = app_dir + '/custom_theme'
+custom_file = app_dir + '/' + themeName
 colors_map = {}
 theme = None
-
-
+defaultThemes = ['classic', 'minimal', 'jungle', '80s']
+themeList = []
 def init():
-    global theme, colors_map
+    global theme, colors_map, themeList
+    themeIn = parser.options.theme
+    update_theme_list()
+    if themeIn in defaultThemes:
+        try:
+            theme = themes.game_themes[themeIn]
+        except:
+            print "Can't find theme: %s" %(themeIn)
+            exit()
+    elif themeIn in themeList:
+        themeName = themeIn
+        try:
+            load_custom_theme( themeName )
+        except:
+            print "Error opening theme: %s" %(themeIn)
+    else:
+        #default to custom theme
+        themeName = 'custom_theme'
+        if not os.path.exists(custom_file):
+            src_file = '/usr/share/make-snake/custom_theme'
+            if not os.path.exists(src_file):
+                sys.exit('Error: custom_theme missing from home and /usr/share')
+            ensure_dir(app_dir)
+            shutil.copyfile(src_file, custom_file)
+        load_custom_theme( themeName )
 
+    colors_map = get_colors_map()
+    '''
     if parser.options.theme != 'custom':
         try:
             theme = themes.game_themes[parser.options.theme]
@@ -41,6 +68,11 @@ def init():
         load_custom_theme()
 
     colors_map = get_colors_map()
+    '''
+def update_theme_list():
+    themeFiles = os.listdir(app_dir)
+    for theme in themeFiles:
+        themeList.append(theme)
 
 def get_color(key):
     return curses.color_pair(colors_map.get(key, 0))
@@ -62,9 +94,9 @@ def get_colors_map():
     return out
 
 
-def load_custom_theme():
+def load_custom_theme( themeName ):
     global theme
-
+    custom_file = app_dir + '/' + themeName
     try:
         with open(custom_file):
             # Init theme

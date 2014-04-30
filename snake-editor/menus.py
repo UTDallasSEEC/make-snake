@@ -34,7 +34,8 @@ fileLocal = os.path.expanduser('~/Snake-content')
 themes = os.listdir(fileLocal)
 naming = []
 #naming.append(["Name","name"])
+naming.append(["New Theme",newName])
 for theme in themes:
     naming.append([theme,"existing"])
-naming.append(["New Theme",newName])
+#naming.append(["New Theme",newName])
 naming.append(["Exit", None])

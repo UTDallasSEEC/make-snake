@@ -39,5 +39,7 @@ def init():
     parser.add_option("-l", "--lives",
                       action="store", dest="lives", default="1",
                       help="Number of lives (1 | 2 | 3 | 4 | 5 )")
-
+    parser.add_option("-c", "--custom", 
+                      action="store_true", dest="custom", default=False,
+                      help="List the custom themes")
     (options, args) = parser.parse_args()

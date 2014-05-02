@@ -13,6 +13,7 @@ import game
 import parser
 import stage
 import sys
+import os
 
 import gamestate as gs
 from kano.utils import is_gui
@@ -22,17 +23,29 @@ def exit():
     graphics.exit()
     gs.save_state()
 
-
 def run():
     try:
         # Init the game
         parser.init()
+        #list themes if -c
+        if parser.options.custom:
+            #pull app_dir from theme file
+            themeList = os.listdir( theme.app_dir )
+            print '\t' + "Themes (python snake -t [THEME NAME] to use a theme):"
+            for themes in themeList:
+                print '\t\t' + themes
+            return 
         stage.init()
         graphics.init()
         theme.init()
         game.reset()
         gs.load_state()
-
+        if parser.options.custom:
+            themeList = os.listdir( theme.app_dir )
+            print "Themes (python snake -t [THEME NAME] to use:" 
+            for themes in themeList:
+                print themes        
+            exit()        
         # Start the game
         gameloop.start()
 

@@ -22,7 +22,7 @@ border = [["Background colour", colors], ["Symbol colour", colors],
           ["Corner symbol", "symbols"], ["Back", None]]
 background = [["Background colour", colors], ["Symbol colour", colors],
               ["Background symbol", "symbols"], ["Back", None]]
-# Main
+# Main attributes menues
 elements = [["Snake", snake], ["Lives", lives], ["Apples", apple],
             ["Back", None]]
 board = [["Background", background], ["Border", border], ["Back", 0]]
@@ -30,6 +30,9 @@ board = [["Background", background], ["Border", border], ["Back", 0]]
 main = [["Board", board], ["Elements", elements], ["Name","name"], ["Back", 0]]
 
 newName = [["Name","name"], ["Back", 0]]
+
+#Setup for the theme menus
+#pull list of other themes. Need to use OS
 fileLocal = os.path.expanduser('~/Snake-content')
 themes = os.listdir(fileLocal)
 naming = []

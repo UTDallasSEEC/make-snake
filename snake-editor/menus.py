@@ -27,15 +27,15 @@ elements = [["Snake", snake], ["Lives", lives], ["Apples", apple],
             ["Back", None]]
 board = [["Background", background], ["Border", border], ["Back", 0]]
 
-main = [["Board", board], ["Elements", elements], ["Name","name"], ["Exit", None]]
+main = [["Board", board], ["Elements", elements], ["Name","name"], ["Back", 0]]
 
-newName = [["Name","name"], ["Exit", None]]
+newName = [["Name","name"], ["Back", 0]]
 fileLocal = os.path.expanduser('~/Snake-content')
 themes = os.listdir(fileLocal)
 naming = []
-#naming.append(["Name","name"])
 naming.append(["New Theme",newName])
+#append list of themes
 for theme in themes:
     naming.append([theme,"existing"])
-#naming.append(["New Theme",newName])
+
 naming.append(["Exit", None])

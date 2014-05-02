@@ -83,7 +83,6 @@ def update():
             return
         if key == keys['DOWN']:
             currentIdx = (currentIdx + 1) % len(currentMenu)
-            #currentIdx = currentIdx + 1
             # Preview colors
             if currentMenu == menus.colors:
                 set_color()

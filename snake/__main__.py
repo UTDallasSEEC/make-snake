@@ -40,12 +40,7 @@ def run():
         theme.init()
         game.reset()
         gs.load_state()
-        if parser.options.custom:
-            themeList = os.listdir( theme.app_dir )
-            print "Themes (python snake -t [THEME NAME] to use:" 
-            for themes in themeList:
-                print themes        
-            exit()        
+   
         # Start the game
         gameloop.start()
 

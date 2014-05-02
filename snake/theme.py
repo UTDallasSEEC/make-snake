@@ -25,21 +25,25 @@ themeList = []
 def init():
     global theme, colors_map, themeList
     themeIn = parser.options.theme
+    #populate the themeList
     update_theme_list()
+
     if themeIn in defaultThemes:
+        #determine if input is a default
         try:
             theme = themes.game_themes[themeIn]
         except:
             print "Can't find theme: %s" %(themeIn)
             exit()
     elif themeIn in themeList:
+        #Check it if exists in Snake-content
         themeName = themeIn
         try:
             load_custom_theme( themeName )
         except:
             print "Error opening theme: %s" %(themeIn)
     else:
-        #default to custom theme
+        #default to custom theme, regardless of input
         themeName = 'custom_theme'
         if not os.path.exists(custom_file):
             src_file = '/usr/share/make-snake/custom_theme'
@@ -50,29 +54,10 @@ def init():
         load_custom_theme( themeName )
 
     colors_map = get_colors_map()
-    '''
-    if parser.options.theme != 'custom':
-        try:
-            theme = themes.game_themes[parser.options.theme]
-        except:
-            print "Can't find theme: %s" % (parser.options.theme)
-            exit()
-    else:
-        # copy custom_theme if it doesn't exist
-        if not os.path.exists(custom_file):
-            src_file = '/usr/share/make-snake/custom_theme'
-            if not os.path.exists(src_file):
-                sys.exit('Error: custom_theme missing from home and /usr/share')
-            ensure_dir(app_dir)
-            shutil.copyfile(src_file, custom_file)
-        load_custom_theme()
 
-    colors_map = get_colors_map()
-    '''
 def update_theme_list():
-    themeFiles = os.listdir(app_dir)
-    for theme in themeFiles:
-        themeList.append(theme)
+    global themeList
+    themeList = os.listdir(app_dir)
 
 def get_color(key):
     return curses.color_pair(colors_map.get(key, 0))

@@ -30,7 +30,12 @@ def run():
         #list themes if -c
         if parser.options.custom:
             #pull app_dir from theme file
-            themeList = os.listdir( theme.app_dir )
+            if os.path.exists( theme.app_dir ):
+                themeList = os.listdir( theme.app_dir )
+            else:
+                os.makedirs( theme.app_dir )
+                themeList = os.listdir( theme.app_dir )
+
             print '\t' + "Themes (python snake -t [THEME NAME] to use a theme):"
             for themes in themeList:
                 print '\t\t' + themes

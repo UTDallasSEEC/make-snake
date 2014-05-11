@@ -43,15 +43,8 @@ def init():
         except:
             print "Error opening theme: %s" %(themeIn)
     else:
-        #default to custom theme, regardless of input
-        themeName = 'custom_theme'
-        if not os.path.exists(custom_file):
-            src_file = '/usr/share/make-snake/custom_theme'
-            if not os.path.exists(src_file):
-                sys.exit('Error: custom_theme missing from home and /usr/share')
-            ensure_dir(app_dir)
-            shutil.copyfile(src_file, custom_file)
-        load_custom_theme( themeName )
+        #if it is not a created theme let user know
+        print "Can't find theme: %s" %(themeIn)
 
     colors_map = get_colors_map()
 

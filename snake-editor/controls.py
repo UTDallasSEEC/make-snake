@@ -78,7 +78,7 @@ def update():
             theme.init()
             gameloop.init()
             nameMode = False
-            currentMenu = menus.main
+            currentMenu = menus.editMain
             currentIdx = 0
             return
         if key == keys['DOWN']:
@@ -91,7 +91,6 @@ def update():
                 themeName = currentMenu[currentIdx][0]
                 theme.init()
                 gameloop.init()
-                #graphics.update()
             return
 
         elif key == keys['UP']:
@@ -104,7 +103,6 @@ def update():
                 themeName = currentMenu[currentIdx][0]
                 theme.init()
                 gameloop.init()
-                #graphics.update()
             return
 
         elif key == keys['LEFT']:

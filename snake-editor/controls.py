@@ -23,9 +23,9 @@ keys = {
     'ENTER': 0x0a,
     'BACKSPACE': 0x7F,
 }
-menu_stack = [[menus.naming, '']]
+menu_stack = [[menus.main, '']]
 currentIdx = 0
-currentMenu = menus.naming
+currentMenu = menus.main
 currentCategory = None
 prevIndex = 0
 symbolMode = False
@@ -86,13 +86,25 @@ def update():
             # Preview colors
             if currentMenu == menus.colors:
                 set_color()
+            elif currentMenu == menus.naming:
+                #pass the saved name from the theme
+                themeName = currentMenu[currentIdx][0]
+                theme.init()
+                gameloop.init()
+                #graphics.update()
             return
 
         elif key == keys['UP']:
             currentIdx = (currentIdx - 1) % len(currentMenu)
             # Preview colors
             if currentMenu == menus.colors:
-                set_color()
+                set_color() 
+            elif currentMenu == menus.naming:
+                #pass the saved name from the theme
+                themeName = currentMenu[currentIdx][0]
+                theme.init()
+                gameloop.init()
+                #graphics.update()
             return
 
         elif key == keys['LEFT']:
@@ -121,8 +133,10 @@ def update():
             elif currentMenu[currentIdx][1] == "existing":
                 #pass the saved name from the theme
                 themeName = currentMenu[currentIdx][0]
+                theme.update_name()
                 theme.init()
-                currentMenu = menus.main
+                graphics.update()
+                currentMenu = menus.editMain
                 currentIdx = 0
                 return
             # Submenu

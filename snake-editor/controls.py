@@ -134,6 +134,8 @@ def update():
                 theme.update_name()
                 theme.init()
                 graphics.update()
+                title = currentMenu[currentIdx][0]
+                menu_stack.append([currentMenu[currentIdx][0],title])
                 currentMenu = menus.editMain
                 currentIdx = 0
                 return

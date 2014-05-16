@@ -27,7 +27,7 @@ elements = [["Snake", snake], ["Lives", lives], ["Apples", apple],
             ["Back", None]]
 board = [["Background", background], ["Border", border], ["Back", 0]]
 
-editMain = [["Board", board], ["Elements", elements], ["Name","name"], ["Back", 0]]
+editMain = [["Board", board], ["Elements", elements], ["Back", 0]]
 
 newName = [["Name","name"], ["Back", 0]]
 

@@ -135,7 +135,7 @@ def update():
                 theme.init()
                 graphics.update()
                 title = currentMenu[currentIdx][0]
-                menu_stack.append([currentMenu[currentIdx][0],title])
+                menu_stack.append([currentMenu[currentIdx][1],title])
                 currentMenu = menus.editMain
                 currentIdx = 0
                 return
@@ -167,7 +167,10 @@ def navigate_back():
         exit()
     menu_stack.pop()
     cur = menu_stack[len(menu_stack) - 1]
-    currentMenu = cur[0]
+    if (cur[0] == "existing"):
+        currentMenu = menus.naming
+    else:
+        currentMenu = cur[0]
     currentIdx = 0
 
 

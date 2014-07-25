@@ -1,6 +1,8 @@
 
 # controls.py
 #
+# Controls menu navigation via keys
+#
 # Copyright (C) 2013 Kano Computing Ltd.
 # License:   http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
@@ -19,6 +21,7 @@ keys = {
     'UP': 0x41,
     'Q': 0x71,
     'ENTER': 0x0a,
+    'BACKSPACE': 0x7F,
 }
 menu_stack = [[menus.main, '']]
 currentIdx = 0
@@ -26,11 +29,13 @@ currentMenu = menus.main
 currentCategory = None
 prevIndex = 0
 symbolMode = False
+nameMode = False
+themeName = 'custom_theme'
 tile = ''
 
 
 def update():
-    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode
+    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode, themeName
 
     key = graphics.screen.getch()
 
@@ -55,18 +60,49 @@ def update():
             gameloop.init()
             symbolMode = False
             return
+        if nameMode:
+            tile = ''
+            while key != keys['ENTER']:
+                if key > 0 and key != keys['ENTER']:
+                    if key == keys['BACKSPACE']:
+                        tile = tile[:-1]
+                    else:
+                        tile += curses.keyname(key)
+                    #Redraw theme and menus
+                    gameloop.init()
+                    graphics.drawCurrentMenu()
+                key = graphics.screen.getch()
+            themeName = tile
+            tile = ''
+            #REdraw board, will also change to new name.
+            theme.init()
+            gameloop.init()
+            nameMode = False
+            currentMenu = menus.editMain
+            currentIdx = 0
+            return
         if key == keys['DOWN']:
             currentIdx = (currentIdx + 1) % len(currentMenu)
             # Preview colors
             if currentMenu == menus.colors:
                 set_color()
+            elif currentMenu == menus.naming:
+                #pass the saved name from the theme
+                themeName = currentMenu[currentIdx][0]
+                theme.init()
+                gameloop.init()
             return
 
         elif key == keys['UP']:
             currentIdx = (currentIdx - 1) % len(currentMenu)
             # Preview colors
             if currentMenu == menus.colors:
-                set_color()
+                set_color() 
+            elif currentMenu == menus.naming:
+                #pass the saved name from the theme
+                themeName = currentMenu[currentIdx][0]
+                theme.init()
+                gameloop.init()
             return
 
         elif key == keys['LEFT']:
@@ -85,23 +121,23 @@ def update():
                 return
             # Tile option
             elif currentMenu[currentIdx][1] == "symbols":
-                '''
-                tile = ''
-                key = ''
-                while key != keys['ENTER']:
-                    key = graphics.screen.getch()
-                    if key > 0 and key != keys['ENTER']:
-                        tile += curses.keyname(key)
-                if tile == '':
-                    tile = '  '
-                category = currentMenu[currentIdx][0]
-                theme.set_tiles_theme(category, tile[:2])
-                navigate_back()
-                # Redraw the board
-                theme.init()
-                gameloop.init()
-                '''
                 symbolMode = True
+                return
+            #Custom Name Mode
+            elif currentMenu[currentIdx][1] == "name":
+                nameMode = True
+                return
+            #Modify existing theme
+            elif currentMenu[currentIdx][1] == "existing":
+                #pass the saved name from the theme
+                themeName = currentMenu[currentIdx][0]
+                theme.update_name()
+                theme.init()
+                graphics.update()
+                title = currentMenu[currentIdx][0]
+                menu_stack.append([menus.editMain,title])
+                currentMenu = menus.editMain
+                currentIdx = 0
                 return
             # Submenu
             else:

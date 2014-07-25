@@ -28,6 +28,7 @@ def init():
     #populate the themeList
     update_theme_list()
 
+<<<<<<< HEAD
     if themeIn in defaultThemes:
         #determine if input is a default
         try:
@@ -42,6 +43,13 @@ def init():
             load_custom_theme( themeName )
         except:
             print "Error opening theme: %s" %(themeIn)
+=======
+    if parser.args.theme != 'custom':
+        try:
+            theme = themes.game_themes[parser.args.theme]
+        except:
+            theme = themes.game_themes['minimal']
+>>>>>>> master
     else:
         #if it is not a created theme let user know
         print "Can't find theme: %s" %(themeIn)

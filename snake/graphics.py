@@ -31,6 +31,11 @@ def drawTile(x, y, tile='', color=None):
 def drawInitGame():
     drawTile(-5, -2, "  Welcome to SNAKE ", theme.get_color('border'))
     drawTile(-4, 2, " Press [ENTER] ", theme.get_color('border'))
+    left = u"\u2190"
+    up = u"\u2191"
+    down = u"\u2193"
+    right = u"\u2192"
+    drawTile(-5, 4, " Use [" + left + up + down + right + "] to move ", theme.get_color('border'))
 
 
 def drawGameOver():
@@ -40,14 +45,14 @@ def drawGameOver():
     sizeStr = ''
     speedStr = ''
     livesStr = str(lives)
-    #set speed string
+    # set speed string
     if(speed == .2):
         speedStr = 'Slow'
-    elif(speed == .15):
+    elif(speed == .12):
         speedStr = 'Medium'
-    elif(speed == .1):
+    elif(speed == .07):
         speedStr = 'Fast'
-    #set size string
+    # set size string
     if(size == 's'):
         sizeStr = 'Small'
     elif(size == 'm'):
@@ -55,11 +60,11 @@ def drawGameOver():
     elif(size == 'l'):
         sizeStr = 'Large'
     drawTile(-4, -10, "  GAME OVER  ", theme.get_color('border'))
-    drawTile(-4, -8, "Score:" + str(game.score), theme.get_color('border'))
-    drawTile(-4, -6, "Speed:" + speedStr, theme.get_color('border'))
-    drawTile(-4, -4, "Size:" + sizeStr, theme.get_color('border'))
-    drawTile(-4, -2, "Lives:" + livesStr, theme.get_color('border'))
-    drawTile(-4, 2, " Press [ENTER] ", theme.get_color('border'))
+    drawTile(-3, -8, "Score:" + str(game.score), theme.get_color('border'))
+    drawTile(-3, -6, "Speed:" + speedStr, theme.get_color('border'))
+    drawTile(-3, -4, "Size:" + sizeStr, theme.get_color('border'))
+    drawTile(-3, -2, "Lives:" + livesStr, theme.get_color('border'))
+    drawTile(-7, 2, " Press [ENTER] to continue ", theme.get_color('border'))
 
 
 def drawScore():

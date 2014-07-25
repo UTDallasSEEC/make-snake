@@ -24,6 +24,7 @@ speed = 0
 def update():
     game.update()
     graphics.update()
+    controls.clear()
 
 
 def step():
@@ -52,7 +53,7 @@ def start():
     global playing, state
     playing = True
     # Launch editor mode
-    if (parser.options.editor):
+    if (parser.args.editor):
         os.system("/usr/share/make-snake/snake-editor/__main__.py")
         __main__.exit()
         exit()
@@ -74,21 +75,21 @@ def stop():
 
 
 def init():
-    global state, speed
+    global state, speed, last_update
 
+    # set the initial time for the first update with the current time
+    last_update = time.time()
+
+    game.score = 0
     game.reset()
     graphics.drawGame()
     state = 1
     try:
-        speed = config.game_speed[parser.options.speed]
+        speed = config.game_speed[parser.args.speed]
     except:
         speed = config.game_speed['m']
 
-    try:
-        livesIn = int(parser.options.lives)
-    except:
-        livesIn = 1
-
+    livesIn = parser.args.lives
     if livesIn >= 1 and livesIn <= 5:
         game.lives = livesIn
         game.livesMax = livesIn

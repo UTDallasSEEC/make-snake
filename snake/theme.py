@@ -26,10 +26,10 @@ themeList = []
 
 def init():
     global theme, colors_map, themeList
-    themeIn = parser.options.theme
+    themeIn = parser.args.theme
     #populate the themeList
     update_theme_list()
-	  if themeIn in defaultThemes:
+    if themeIn in defaultThemes:
         #determine if input is a default
         try:
             theme = themes.game_themes[themeIn]
@@ -45,7 +45,7 @@ def init():
             print "Error opening theme: %s" %(themeIn)
 	else:
         #if it is not a created theme let user know
-        print "Can't find theme: %s" %(themeIn)
+            print "Can't find theme: %s" %(themeIn)
 
     colors_map = get_colors_map()
 
@@ -73,9 +73,9 @@ def get_colors_map():
     return out
 
 
-def load_custom_theme():
+def load_custom_theme( themeName ):
     global theme
-
+    custom_file = app_dir + '/' + themeName #pulls theme from what is passed via -t 
     try:
         with open(custom_file):
             # Init theme

@@ -64,7 +64,6 @@ def init():
 
     parser.add_argument("-t", "--theme",
                         action="store", dest="theme", default='minimal',
-                        choices=['classic', 'minimal', 'jungle', '80s', 'custom'],
                         help="Game theme (classic | minimal | jungle | 80s | custom)")
 
     parser.add_argument("-e", "--editor",
@@ -74,7 +73,9 @@ def init():
     parser.add_argument("-m", "--ModeTutorial",
                         action="store_true", dest="tutorial", default=False,
                         help="Closes game after game over")
-
+    parser.add_argument("-c","--CustomTheme",
+                        action="store_true",dest="custom",default=False,
+                        help="List Custom Themes")
     # the argument parser prints a message when an incorrect argument was given then exits
     # this will cause the screen to be cleared immediately, so we catch the exit
     args = parser.parse_args()

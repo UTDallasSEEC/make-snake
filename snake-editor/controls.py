@@ -30,12 +30,13 @@ currentCategory = None
 prevIndex = 0
 symbolMode = False
 nameMode = False
+deleteMode = False
 themeName = 'custom_theme'
 tile = ''
 
 
 def update():
-    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode, themeName
+    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode, themeName,deleteMode
 
     key = graphics.screen.getch()
 
@@ -81,6 +82,12 @@ def update():
             currentMenu = menus.editMain
             currentIdx = 0
             return
+        if deleteMode:
+            try:
+                os.remove(theme.custom_file);
+                currentMenu = menus.main
+            except OSError, e:
+                currentMenu = menus.main #need to decide what to do here
         if key == keys['DOWN']:
             currentIdx = (currentIdx + 1) % len(currentMenu)
             # Preview colors
@@ -126,6 +133,9 @@ def update():
             #Custom Name Mode
             elif currentMenu[currentIdx][1] == "name":
                 nameMode = True
+                return
+            elif currentMenu[currentIdx][1] == "deleteyes":
+                deleteMode == True
                 return
             #Modify existing theme
             elif currentMenu[currentIdx][1] == "existing":

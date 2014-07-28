@@ -6,7 +6,7 @@
 # Copyright (C) 2013 Kano Computing Ltd.
 # License:   http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
-
+import os
 import curses
 import __main__
 import graphics
@@ -36,7 +36,7 @@ tile = ''
 
 
 def update():
-    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode, themeName,deleteMode
+    global tile, currentIdx, currentMenu, currentCategory, prevIndex, symbolMode, nameMode, themeName, deleteMode, menu_stack
 
     key = graphics.screen.getch()
 
@@ -85,7 +85,18 @@ def update():
         if deleteMode:
             try:
                 os.remove(theme.custom_file);
+                deleteMode = False
+                #navigate_back()
+                #theme.init()
+                #gameloop.init()
+                #deleteMode = False
+                #theme.init()
+                #gameloop.init()
+                menu_stack = [[menus.main, '']]
                 currentMenu = menus.main
+                themeName = 'custom_theme' 
+                currentIdx = 0
+                return
             except OSError, e:
                 currentMenu = menus.main #need to decide what to do here
         if key == keys['DOWN']:
@@ -104,6 +115,7 @@ def update():
             currentIdx = (currentIdx - 1) % len(currentMenu)
             # Preview colors
             if currentMenu == menus.colors:
+                
                 set_color() 
             elif currentMenu == menus.naming:
                 #pass the saved name from the theme
@@ -134,8 +146,8 @@ def update():
             elif currentMenu[currentIdx][1] == "name":
                 nameMode = True
                 return
-            elif currentMenu[currentIdx][1] == "deleteyes":
-                deleteMode == True
+            elif currentMenu[currentIdx][1] == "delete":
+                deleteMode = True
                 return
             #Modify existing theme
             elif currentMenu[currentIdx][1] == "existing":

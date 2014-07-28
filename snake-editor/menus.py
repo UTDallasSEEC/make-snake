@@ -31,7 +31,7 @@ elements = [["Snake", snake], ["Lives", lives], ["Apples", apple],
             ["Back", None]]
 board = [["Background", background], ["Border", border], ["Back", 0]]
 
-delete = [["Really Delete?","deleteyes"],["No",0]]
+delete = [["Really Delete?","yep"],["Yes","delete"],["No",0]]
 
 editMain = [["Board", board], ["Elements", elements],["Delete",delete], ["Back", 0]]
 

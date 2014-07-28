@@ -39,13 +39,19 @@ newName = [["Name","name"], ["Back", 0]]
 
 #Setup for the theme menus
 #pull list of other themes. Need to use OS
-fileLocal = os.path.expanduser('~/Snake-content')
-themes = os.listdir(fileLocal)
 naming = []
-#append list of themes
-for theme in themes:
-    naming.append([theme,"existing"])
-
-naming.append(["Back", 0])
 
 main = [["New Theme", newName], ["Current Themes", naming], ["Exit", None]]
+
+def update_naming():
+    global naming
+    fileLocal = os.path.expanduser('~/Snake-content')
+    themes = os.listdir(fileLocal)
+    #clear naming
+    naming[:] = []
+    for theme in themes:
+        naming.append([theme,"existing"])
+    naming.append(["Back",0])
+    return
+
+update_naming()

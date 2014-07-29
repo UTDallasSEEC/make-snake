@@ -145,8 +145,21 @@ def update():
                 nameMode = True
                 return
             elif currentMenu[currentIdx][1] == "delete":
-                deleteMode = True
-                return
+                #deleteMode = Truei
+                try:
+                    os.remove(theme.custom_file);
+                    themeName = 'custom_theme'
+                    menus.update_naming()
+                    theme.init()
+                    gameloop.init()
+                    menu_stack = [[menus.main, '']]
+                    currentMenu = menus.main 
+                    currentIdx = 0
+                    #deleteMode = False
+                    return
+                except OSError, e:
+                    currentMenu = menus.main #need to decide what to do here                
+                    return
             #Modify existing theme
             elif currentMenu[currentIdx][1] == "existing":
                 #pass the saved name from the theme

@@ -86,12 +86,12 @@ def update():
         if deleteMode:
             try:
                 os.remove(theme.custom_file);
+                themeName = 'custom_theme'
                 menus.update_naming()
                 theme.init()
                 gameloop.init()
                 menu_stack = [[menus.main, '']]
-                currentMenu = menus.main
-                themeName = 'custom_theme' 
+                currentMenu = menus.main 
                 currentIdx = 0
                 deleteMode = False
                 return

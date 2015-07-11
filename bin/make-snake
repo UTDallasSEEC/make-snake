@@ -84,6 +84,8 @@ function loadLevel
 
 function printGainedExp
 {
+    breakline
+    typewriter_echo "Fantastic!" 0 2 1 0
     if [ "$gained_exp" -gt 0 ]; then
         breakline
         typewriter_echo "Fantastic!" 0 2 1 0

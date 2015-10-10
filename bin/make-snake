@@ -5,16 +5,11 @@
 # Copyright (C) 2014, 2015 Kano Computing Ltd.
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
+# Modified 2015, by Alex Averill for use at the Science and Engineering Education Center 
+# at The Univerisity of Texas at Dallas
+#
 
-
-# Kanotracker keeps a log on how much we play make-snake
-SELF_PID=$$
-kano-tracker-ctl session start "make-snake" $SELF_PID
-function kanotracker {
-    kano-tracker-ctl session end "make-snake" $SELF_PID
-}
-trap kanotracker EXIT
-
+# The Major changes were removal of Social and Tracking portions of the Code.
 
 dir="/usr/share/make-snake"
 
@@ -64,7 +59,7 @@ function inputLoop
 function saveLevelFromArg
 {
     # Save level
-    kano-profile-cli save_app_state_variable make-snake level $1
+    #kano-profile-cli save_app_state_variable make-snake level $1
 }
 
 function saveLevel
@@ -79,7 +74,7 @@ function saveLevel
 
 function loadLevel
 {
-    kano-profile-cli load_app_state_variable make-snake level
+    #kano-profile-cli load_app_state_variable make-snake level
 }
 
 function printGainedExp
@@ -130,8 +125,6 @@ if [ "$mod_stage" -eq 0 ]; then
     read
     # tutorial mode (-m), slow (-s s), large (-b l), 80s (-t 80s) 
     python -B $dir -m -s s -b l -t 80s
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 2: 'python snake'
@@ -149,8 +142,6 @@ if [ "$mod_stage" -eq 1 ]; then
     inputLoop 'python snake'
     # tutorial mode (-m), slow (-s s)
     python -B $dir -m -s s
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 3: 'python snake -b m'
@@ -167,8 +158,6 @@ if [ "$mod_stage" -eq 2 ]; then
     inputLoop 'python snake -b m' 'python snake --board m'
     # tutorial mode (-m), medium (-b m), slow (-s s)
     python -B $dir -m -b m -s s
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 4: 'python snake -l 3'
@@ -185,8 +174,6 @@ if [ "$mod_stage" -eq 3 ]; then
     inputLoop 'python snake --lives 3' 'python snake -l 3'
     # tutorial mode (-m), 3 lives (-l 3)
     python -B $dir -ml 3
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 5: 'python snake -s f'
@@ -201,8 +188,6 @@ if [ "$mod_stage" -eq 4 ]; then
 
     inputLoop 'python snake -s f' 'python snake --speed f'
     python -B $dir -ms f
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 6: 'python snake -t jungle'
@@ -217,8 +202,6 @@ if [ "$mod_stage" -eq 5 ]; then
 
     inputLoop 'python snake -t jungle' 'python snake --theme jungle'
     python -B $dir -mt jungle
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 7: 'python snake -e'
@@ -232,8 +215,6 @@ if [ "$mod_stage" -eq 6 ]; then
 
     inputLoop 'python snake -e' 'python snake --editor'
     python -B $dir -me
-    saveLevel
-    printGainedExp
 fi
 
 # Exercise 8: 'python snake -t custom-theme'
@@ -246,8 +227,7 @@ if [ "$mod_stage" -eq 7 ]; then
     typewriter_echo "Type {{2 python snake -t custom-theme }} to play with the design that you saved in the editor." 0 2 1 0
     inputLoop 'python snake -t custom-theme' 'python snake --theme custom-theme'
     python -B $dir -mt custom-theme
-    saveLevel
-    printGainedExp
+     
 fi
 
 # Exercise 9: 'python snake --help'
@@ -261,9 +241,7 @@ if [ "$mod_stage" -eq 8 ]; then
 
     inputLoop 'python snake --help' 'python snake -h'
     python -B $dir --help | sed "s/^/    /"
-    saveLevel
-    printGainedExp
-
+    
     breakline
     typewriter_echo "{{4 + }} {{3 Great! You've completed Make Snake!}}" 1 2 1 0
     typewriter_echo "Press {{1 ENTER }} to continue" 0 0 1 0

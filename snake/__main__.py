@@ -36,13 +36,16 @@ def run():
     try:
         # Init the game
         parser.init()
+<<<<<<< HEAD
         # Check for editor
         if (parser.args.editor):
             os.system("/usr/share/make-snake/snake-editor/__main__.py")
             sys.exit(0)
+=======
+        stage.init()
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
         graphics.init()
         theme.init()
-        stage.init()
         game.reset()
         gs.load_state()
 

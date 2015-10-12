@@ -7,6 +7,7 @@
 #
 
 import time
+import subprocess
 import graphics
 import game
 import config
@@ -50,6 +51,20 @@ def step():
 def start():
     global playing, state
     playing = True
+<<<<<<< HEAD
+=======
+    # Launch editor mode
+    if (parser.args.editor):
+        os.system("/usr/share/make-snake/snake-editor/__main__.py")
+        __main__.exit()
+        exit()
+    # Reset the game
+    if (parser.args.reset):
+        # We use 10 as reset level, so the user does not lose badges and level
+        os.system("kano-profile-cli save_app_state_variable make-snake level 10")
+        __main__.exit(False)
+        exit()
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
 
     while playing:
         controls.update()

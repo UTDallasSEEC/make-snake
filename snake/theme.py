@@ -5,8 +5,6 @@
 # Copyright (C) 2013, 2014 Kano Computing Ltd.
 # License: http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
-# Contributors: https://github.com/alexaverill
-#
 
 import os
 import sys
@@ -15,13 +13,21 @@ import shutil
 import parser
 import themes
 import xml.etree.ElementTree as ET
+<<<<<<< HEAD
 #from kano.utils import ensure_dir
 
 CUSTOM_THEME_PATH = '/usr/share/make-snake/custom-theme.xml'
 DEFAULT_THEMES = ['classic', 'minimal', 'jungle', '80s']
+=======
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
 
+from kano.utils import ensure_dir
 app_dir = os.path.expanduser('~/Snake-content')
+<<<<<<< HEAD
 CUSTOM_FILE = app_dir + '/custom-theme.xml'
+=======
+custom_file = app_dir + '/custom_theme'
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
 colors_map = {}
 theme = None
 
@@ -29,12 +35,13 @@ theme = None
 def init():
     global theme, colors_map
 
-    if parser.args.theme in DEFAULT_THEMES:
+    if parser.args.theme != 'custom':
         try:
             theme = themes.game_themes[parser.args.theme]
         except:
             theme = themes.game_themes['minimal']
     else:
+<<<<<<< HEAD
         # copy custom-theme.xml if it doesn't exist
         if not os.path.exists(CUSTOM_FILE):
             if not os.path.exists(CUSTOM_THEME_PATH):
@@ -43,6 +50,16 @@ def init():
             shutil.copyfile(CUSTOM_THEME_PATH, CUSTOM_FILE)
         # Load the customn theme
         load_theme()
+=======
+        # copy custom_theme if it doesn't exist
+        if not os.path.exists(custom_file):
+            src_file = '/usr/share/make-snake/custom_theme'
+            if not os.path.exists(src_file):
+                sys.exit('Error: custom_theme missing from home and /usr/share')
+            ensure_dir(app_dir)
+            shutil.copyfile(src_file, custom_file)
+        load_custom_theme()
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
 
     colors_map = get_colors_map()
 
@@ -67,10 +84,11 @@ def get_colors_map():
     return out
 
 
-def load_theme():
+def load_custom_theme():
     global theme
 
     try:
+<<<<<<< HEAD
         name = parser.args.theme
         if not name.endswith('.xml'):
             name += '.xml'
@@ -82,10 +100,13 @@ def load_theme():
                 theme_file = webload_file
 
         with open(theme_file):
+=======
+        with open(custom_file):
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
             # Init theme
             theme = themes.game_themes['classic']
             # Parse XML
-            tree = ET.parse(theme_file)
+            tree = ET.parse(custom_file)
             root = tree.getroot()
             # Colors
             theme['colors']['bg'] = (get_curses_color(root[0][0].attrib.get('font')),
@@ -128,6 +149,7 @@ def get_curses_color(string):
         return curses.COLOR_CYAN
     else:
         return curses.COLOR_WHITE
+<<<<<<< HEAD
 
 
 def update_theme_list():
@@ -151,3 +173,5 @@ def update_theme_list():
             if s.endswith('.xml'):
                 themes.append(s)
     return themes
+=======
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill

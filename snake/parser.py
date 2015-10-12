@@ -5,11 +5,13 @@
 # Copyright (C) 2013, 2014 Kano Computing Ltd.
 # License:   http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License v2
 #
-# Contributors: https://github.com/alexaverill
-#
 
+<<<<<<< HEAD
 import utils
 from kanoutils import run_cmd, run_bg
+=======
+from kano.utils import run_cmd, run_bg
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill
 from argparse import ArgumentParser
 
 args = None
@@ -67,11 +69,8 @@ def init():
 
     parser.add_argument("-t", "--theme",
                         action="store", dest="theme", default='minimal',
-                        help="Game themes (classic | minimal | jungle | 80s ) + custom themes")
-
-    parser.add_argument("-p", "--print",
-                        action="store_true", dest="print_themes", default=False,
-                        help="Print all available themes")
+                        choices=['classic', 'minimal', 'jungle', '80s', 'custom'],
+                        help="Game theme (classic | minimal | jungle | 80s | custom)")
 
     parser.add_argument("-e", "--editor",
                         action="store_true", dest="editor", default=False,
@@ -90,6 +89,7 @@ def init():
                         help="Share your favourite theme with the world")
 
     args = parser.parse_args()
+<<<<<<< HEAD
 
     # Check for share argument
     if (args.share):
@@ -106,3 +106,5 @@ def init():
     # Check for reset argument
     if (args.reset):
         utils.reset_game()
+=======
+>>>>>>> parent of b280dda... Added print argument to list themes, also added ability to play a saved theme @alexaverill

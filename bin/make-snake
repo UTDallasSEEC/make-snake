@@ -17,7 +17,10 @@ function breakline
 {
     echo -ne "\n"
 }
-
+function typewriter_echo
+{
+	echo $1
+}
 function header
 {
     clear
@@ -60,6 +63,7 @@ function saveLevelFromArg
 {
     # Save level
     #kano-profile-cli save_app_state_variable make-snake level $1
+    return 0
 }
 
 function saveLevel
@@ -75,6 +79,7 @@ function saveLevel
 function loadLevel
 {
     #kano-profile-cli load_app_state_variable make-snake level
+    return 0
 }
 
 function printGainedExp
@@ -84,7 +89,10 @@ function printGainedExp
         typewriter_echo "Fantastic! You gained {{2 $gained_exp }} experience points!" 0 2 1 0
     fi
 }
-
+function colour_echo
+{
+    echo $1
+}
 function colourEcho
 {
     echo -n "    "

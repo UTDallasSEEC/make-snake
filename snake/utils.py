@@ -9,11 +9,11 @@
 
 import os
 
-from kano_world.share import upload_share
-from kano.network import is_internet
-from kano_world.functions import login_using_token
-from kano_profile.badges import increment_app_state_variable_with_dialog
-from kano.utils import run_cmd
+#from kano_world.share import upload_share
+#from kano.network import is_internet
+#from kano_world.functions import login_using_token
+#from kano_profile.badges import increment_app_state_variable_with_dialog
+#from kano.utils import run_cmd
 from theme import update_theme_list, DEFAULT_THEMES, app_dir
 
 
@@ -102,7 +102,7 @@ def share_theme():
 
 def reset_game():
     # We use 10 as reset level, so the user does not lose badges and level
-    os.system("kano-profile-cli save_app_state_variable make-snake level 10")
+    #os.system("kano-profile-cli save_app_state_variable make-snake level 10")
     exit(0)
 
 

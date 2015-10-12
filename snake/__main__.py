@@ -16,8 +16,8 @@ import stage
 import sys
 
 import gamestate as gs
-from kano.utils import is_gui
-
+#from kano.utils import is_gui
+is_gui=True
 
 def exit(save_state=True):
     """Attempts to tidy up the graphics, and then save the app state.
@@ -52,7 +52,7 @@ def run():
     except KeyboardInterrupt:
         exit()
 
-if not is_gui():
-    sys.exit("make-snake requires an X session")
+#if not is_gui():
+#    sys.exit("make-snake requires an X session")
 
 run()

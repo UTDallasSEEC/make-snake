@@ -14,8 +14,8 @@ import __main__
 import os
 import time
 
-from kano.window import _get_window_by_child_pid, gdk_window_settings
-from kano_settings.system.display import get_status
+from kanowindow import _get_window_by_child_pid, gdk_window_settings
+#from kano_settings.system.display import get_status
 
 
 def init():

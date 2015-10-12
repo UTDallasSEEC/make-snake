@@ -9,7 +9,7 @@
 #
 
 import utils
-from kano.utils import run_cmd, run_bg
+from kanoutils import run_cmd, run_bg
 from argparse import ArgumentParser
 
 args = None

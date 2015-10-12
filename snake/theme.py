@@ -15,7 +15,7 @@ import shutil
 import parser
 import themes
 import xml.etree.ElementTree as ET
-from kano.utils import ensure_dir
+#from kano.utils import ensure_dir
 
 CUSTOM_THEME_PATH = '/usr/share/make-snake/custom-theme.xml'
 DEFAULT_THEMES = ['classic', 'minimal', 'jungle', '80s']
@@ -39,7 +39,7 @@ def init():
         if not os.path.exists(CUSTOM_FILE):
             if not os.path.exists(CUSTOM_THEME_PATH):
                 sys.exit('Error: custom-theme.xml missing from home and /usr/share/make-snake')
-            ensure_dir(app_dir)
+            #ensure_dir(app_dir)
             shutil.copyfile(CUSTOM_THEME_PATH, CUSTOM_FILE)
         # Load the customn theme
         load_theme()

@@ -17,7 +17,10 @@ import sys
 
 import gamestate as gs
 from kano.utils import is_gui
-
+with open(r'/var/stats/snakestats.txt','r+')as f:
+	value=int(f.read())
+	f.seek(0)
+	f.write(str(value+1))
 
 def exit(save_state=True):
     """Attempts to tidy up the graphics, and then save the app state.
